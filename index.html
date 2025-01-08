@@ -99,29 +99,29 @@
             margin-top: 30px;
             display: flex;
             justify-content: center;
-            position: relative;
+            gap: 20px;
         }
 
         .btn {
             padding: 10px 20px;
-            margin: 10px;
             font-size: 1.2em;
             cursor: pointer;
             border: none;
             border-radius: 5px;
             transition: all 0.3s ease;
-            position: absolute;
+            position: relative;
         }
 
         #yesButton {
             background-color: #d9a066;
             color: white;
-            transform: translate(-50%, -50%);
         }
 
         #yesButton.center {
+            position: absolute;
             left: 50%;
             top: 50%;
+            transform: translate(-50%, -50%);
         }
 
         #noButton {
@@ -164,7 +164,7 @@
             // Calculate available area excluding the book
             const minX = containerRect.left;
             const maxX = containerRect.right - noButton.offsetWidth;
-            const minY = containerRect.top;
+            const minY = containerRect.top + 50; // Ensure it doesn't overlap with header
             const maxY = containerRect.bottom - noButton.offsetHeight;
 
             let x, y;
@@ -200,4 +200,3 @@
     </script>
 </body>
 </html>
-
