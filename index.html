@@ -1,185 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles.css">
     <style>
-        /* Body Styling */
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            height: 100vh;
+            background: linear-gradient(120deg, #d3b8ae, #9b847e, #f0e5d3);
+            background-size: 400% 400%;
+            animation: gradientBackground 10s ease infinite;
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #ffe7e3; /* Set background color */
+            height: 100vh;
             overflow: hidden;
-            position: relative;
         }
 
-        /* Container Styling */
+        @keyframes gradientBackground {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
         .container {
-            position: relative;
             text-align: center;
             padding: 20px;
-            z-index: 1; /* Above the background */
-        }
-
-        /* Question Text */
-        .header_text {
-            font-size: 1.8em;
-            color: #5c5349;
-            margin: 20px 0;
-            font-weight: bold;
-        }
-
-        /* Card and Book Style */
-        .book-container {
-            position: relative;
-            width: 300px; /* Instagram square size */
-            height: 300px;
-            perspective: 1000px;
-            margin: 0 auto 30px auto; /* Space between card and buttons */
-        }
-
-        .book {
-            width: 100%;
-            height: 100%;
-            background: #fff;
-            border-radius: 10px;
-            position: absolute;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 10px;
-            transform-style: preserve-3d;
-            transition: transform 0.8s ease;
+            animation: fadeIn 1.5s ease-out;
         }
 
-        .book-cover, .book-content {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            border-radius: 10px;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .book-cover {
-            background: linear-gradient(to right, #bc7c5a, #d9a066);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            font-size: 1.5em;
+        .header_text {
+            font-size: 2em;
+            color: #5c5349;
+            margin: 10px 0;
             font-weight: bold;
         }
 
-        .book-content {
-            background: #fff;
-            transform: rotateY(180deg);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .book-content img {
-            width: 70%;
+        .gif_container img {
+            max-width: 100%;
             height: auto;
-            object-fit: contain;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
 
-        .book-container:hover .book {
-            transform: rotateY(180deg);
-        }
-
-        /* Buttons */
         .buttons {
-            margin-top: 30px;
-            display: flex;
-            justify-content: center;
+            margin-top: 20px;
         }
 
         .btn {
-            padding: 10px 20px;
-            margin: 10px;
             font-size: 1.2em;
-            cursor: pointer;
+            padding: 10px 20px;
+            margin: 5px;
             border: none;
             border-radius: 5px;
-            transition: all 0.3s ease;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.3s;
         }
 
         #yesButton {
-            background-color: #d9a066;
+            background-color: #6c9c84;
             color: white;
         }
 
         #yesButton:hover {
-            transform: scale(1.2);
+            transform: scale(1.1);
+            background-color: #567a63;
         }
 
         #noButton {
-            background-color: #e8c177;
+            background-color: #bc5a5b;
             color: white;
             position: relative;
         }
 
-        .hide {
-            display: none;
-        }
-
-        /* White Background Square Behind Content */
-        .content-box {
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        #noButton:hover {
+            transform: scale(1.1);
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="content-box">
+        <div>
             <h1 class="header_text">Maaari ba kitang hintayin, Rhiya?</h1>
             <h1 class="header_text">Para maipatunayan ko na mahal kita.</h1>
+        </div>
+        <div class="gif_container">
+            <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExcDdtZ2JiZDR0a3lvMWF4OG8yc3p6Ymdvd3g2d245amdveDhyYmx6eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/cLS1cfxvGOPVpf9g3y/giphy.gif" alt="Cute animated illustration">
+        </div>
+        <div class="buttons">
+            <button class="btn" id="yesButton" onclick="nextPage()">Yes</button>
+            <button class="btn" id="noButton" onmouseover="moveButton()" onclick="moveButton()">No</button>
+            <script>
+                function nextPage() {
+                    window.location.href = "yes.html";
+                }
 
-            <div class="book-container">
-                <div class="book">
-                    <div class="book-cover">Click on me :)</div>
-                    <div class="book-content">
-                        <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExcDdtZ2JiZDR0a3lvMWF4OG8yc3p6Ymdvd3g2d245amdveDhyYmx6eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/cLS1cfxvGOPVpf9g3y/giphy.gif" alt="Dancing Guy">
-                    </div>
-                </div>
-            </div>
-
-            <div class="buttons">
-                <button class="btn" id="yesButton" onclick="nextPage()">Yes</button>
-                <button class="btn" id="noButton" onmouseover="moveButton()" onclick="moveButton()">No</button>
-            </div>
+                function moveButton() {
+                    var button = document.getElementById('noButton');
+                    var x = Math.random() * (window.innerWidth - button.offsetWidth - 20);
+                    var y = Math.random() * (window.innerHeight - button.offsetHeight - 20);
+                    button.style.left = `${x}px`;
+                    button.style.top = `${y}px`;
+                    button.style.position = 'absolute';
+                }
+            </script>
         </div>
     </div>
-
-    <script>
-        function nextPage() {
-            window.location.href = "yes.html";
-        }
-
-        function moveButton() {
-            var noButton = document.getElementById('noButton');
-            var x = Math.random() * (window.innerWidth - noButton.offsetWidth) - 85;
-            var y = Math.random() * (window.innerHeight - noButton.offsetHeight) - 48;
-
-            // Prevent "No" button from going over the card
-            while (x < 300 || x > 600 || y < 300 || y > 600) {
-                x = Math.random() * (window.innerWidth - noButton.offsetWidth) - 85;
-                y = Math.random() * (window.innerHeight - noButton.offsetHeight) - 48;
-            }
-
-            noButton.style.left = `${x}px`;
-            noButton.style.top = `${y}px`;
-        }
-    </script>
 </body>
 </html>
