@@ -3,214 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./styles.css">
+    <title>Interactive Card</title>
     <style>
-        /* Body and Video Background */
         body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #ffe7e3;
+            font-family: Arial, sans-serif;
+        }
+        .card-container {
+            text-align: center;
+        }
+        .card {
+            width: 300px;
+            height: 300px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            margin-bottom: 20px;
             overflow: hidden;
             position: relative;
         }
-
-        /* Video Background */
-        .video-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: -1; /* Behind all other elements */
+        .card:hover {
+            transform: scale(1.05);
         }
-
-        /* Container Styling */
-        .container {
-            position: relative;
-            text-align: center;
+        .card-content {
             padding: 20px;
-            z-index: 1; /* Above the video */
         }
-
-        /* Question Text */
-        .header_text {
-            font-size: 1.8em;
-            color: #5c5349;
-            margin: 20px 0;
-            font-weight: bold;
+        .card-title {
+            font-size: 24px;
+            margin-bottom: 10px;
         }
-
-        /* Card and Book Style */
-        .book-container {
-            position: relative;
-            width: 300px; /* Instagram square size */
-            height: 300px;
-            perspective: 1000px;
-            margin: 0 auto 30px auto; /* Space between card and buttons */
+        .card-description {
+            font-size: 16px;
+            color: #666;
         }
-
-        .book {
-            width: 100%;
-            height: 100%;
-            background: #fff;
-            border-radius: 10px;
-            position: absolute;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        .button-container {
             display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 10px;
+            justify-content: space-around;
         }
-
-        .book-cover {
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to right, #bc7c5a, #d9a066);
-            border-radius: 10px;
-            position: absolute;
-            transform-origin: left;
-            transition: transform 0.8s ease;
-        }
-
-        .book-content {
-            width: 100%;
-            height: 100%;
-            background: #fff;
-            border-radius: 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-
-        .book-content img {
-            width: 70%;
-            height: auto;
-            object-fit: contain;
-        }
-
-        .book:hover .book-cover {
-            transform: rotateY(-120deg);
-        }
-
-        .book:hover .book-content {
-            opacity: 1;
-        }
-
-        /* Buttons */
-        .buttons {
-            margin-top: 30px;
-            display: flex;
-            justify-content: center;
-        }
-
-        .btn {
+        .button {
             padding: 10px 20px;
-            margin: 10px;
-            font-size: 1.2em;
-            cursor: pointer;
+            font-size: 16px;
+            color: white;
+            background-color: #007bff;
             border: none;
             border-radius: 5px;
-            transition: all 0.3s ease;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
         }
-
-        #yesButton {
-            background-color: #d9a066;
-            color: white;
-        }
-
-        #yesButton:hover {
-            transform: scale(2);
-        }
-
-        #noButton {
-            background-color: #e8c177;
-            color: white;
-        }
-
-        .no-shrink {
-            font-size: 0.8em;
-            padding: 5px 10px;
-            opacity: 0.3;
-            position: absolute;
-            transition: all 0.3s ease;
-        }
-
-        .hide {
-            display: none;
-        }
-
-        /* White Background Square Behind Content */
-        .content-box {
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        .button:hover {
+            background-color: #0056b3;
+            transform: scale(1.1);
         }
     </style>
 </head>
 <body>
-
-    <!-- Video Background -->
-    <video class="video-background" autoplay muted loop>
-        <source src="https://drive.google.com/uc?export=download&id=1uBCxYiH0yIV1gCRqrY16YMuKOPY0n7AO" type="video/mp4"> <!-- You can replace this with any calming video -->
-        Your browser does not support the video tag.
-    </video>
-
-    <!-- Main Content -->
-    <div class="container">
-        <div class="content-box">
-            <h1 class="header_text">Maaari ba kitang hintayin, Rhiya?</h1>
-            <h1 class="header_text">Para maipatunayan ko na mahal kita.</h1>
-
-            <!-- Book with Dancing Guy -->
-            <div class="book-container">
-                <div class="book">
-                    <div class="book-cover"></div>
-                    <div class="book-content">
-                        <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExcDdtZ2JiZDR0a3lvMWF4OG8yc3p6Ymdvd3g2d245amdveDhyYmx6eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/cLS1cfxvGOPVpf9g3y/giphy.gif" alt="Dancing Guy">
-                    </div>
-                </div>
-            </div>
-
-            <!-- Buttons -->
-            <div class="buttons">
-                <button class="btn" id="yesButton" onclick="nextPage()">Yes</button>
-                <button class="btn" id="noButton" onclick="moveButton()">No</button>
+    <div class="card-container">
+        <div class="card">
+            <div class="card-content">
+                <div class="card-title">Question</div>
+                <div class="card-description">Hover over the card to see the effect.</div>
             </div>
         </div>
+        <div class="button-container">
+            <button class="button">YES</button>
+            <button class="button">NO</button>
+        </div>
     </div>
-
-    <script>
-        // Function to move the No button
-        function moveButton() {
-            const noButton = document.getElementById("noButton");
-            const yesButton = document.getElementById("yesButton");
-            let x = Math.random() * (window.innerWidth - noButton.offsetWidth);
-            let y = Math.random() * (window.innerHeight - noButton.offsetHeight);
-            noButton.style.left = `${x}px`;
-            noButton.style.top = `${y}px`;
-
-            // Shrinking the No button
-            noButton.classList.add("no-shrink");
-
-            // Enlarge the Yes button
-            yesButton.style.transform = "scale(2)"; // Enlarge slightly
-
-            // Remove No button after 10 movements
-            if (noButton.offsetWidth < 30) {
-                noButton.classList.add("hide");
-            }
-        }
-
-        function nextPage() {
-            window.location.href = "yes.html";
-        }
-    </script>
 </body>
 </html>
