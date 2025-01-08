@@ -115,13 +115,14 @@
         #yesButton {
             background-color: #d9a066;
             color: white;
+            transition: all 0.3s ease;
         }
 
-        #yesButton.center {
+        #yesButton.center-lower {
             position: absolute;
+            top: calc(100% + 20px); /* Moves below the card */
             left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
+            transform: translateX(-50%);
         }
 
         #noButton {
@@ -190,7 +191,7 @@
                 noButton.textContent = "I no allow you";
             } else if (clickCount >= 5) {
                 noButton.style.display = "none";
-                yesButton.classList.add("center");
+                yesButton.classList.add("center-lower");
             }
         }
 
