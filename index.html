@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles.css">
     <style>
+        /* Body Styling */
         body {
             margin: 0;
             font-family: Arial, sans-serif;
@@ -12,18 +13,20 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #ffe7e3;
+            background-color: #ffe7e3; /* Set background color */
             overflow: hidden;
             position: relative;
         }
 
+        /* Container Styling */
         .container {
             position: relative;
             text-align: center;
             padding: 20px;
-            z-index: 1;
+            z-index: 1; /* Above the background */
         }
 
+        /* Question Text */
         .header_text {
             font-size: 1.8em;
             color: #5c5349;
@@ -31,12 +34,13 @@
             font-weight: bold;
         }
 
+        /* Card and Book Style */
         .book-container {
             position: relative;
-            width: 300px;
+            width: 300px; /* Instagram square size */
             height: 300px;
             perspective: 1000px;
-            margin: 0 auto 30px auto;
+            margin: 0 auto 30px auto; /* Space between card and buttons */
         }
 
         .book {
@@ -80,15 +84,21 @@
             align-items: center;
         }
 
+        .book-content img {
+            width: 70%;
+            height: auto;
+            object-fit: contain;
+        }
+
         .book-container:hover .book {
             transform: rotateY(180deg);
         }
 
+        /* Buttons */
         .buttons {
             margin-top: 30px;
             display: flex;
             justify-content: center;
-            position: relative;
         }
 
         .btn {
@@ -104,10 +114,6 @@
         #yesButton {
             background-color: #d9a066;
             color: white;
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
         }
 
         #yesButton:hover {
@@ -117,22 +123,19 @@
         #noButton {
             background-color: #e8c177;
             color: white;
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        #noButton.no-shrink {
-            font-size: 0.8em;
-            padding: 5px 10px;
-            opacity: 0.3;
-            position: absolute;
-            transition: all 0.3s ease;
+            position: relative;
         }
 
         .hide {
             display: none;
+        }
+
+        /* White Background Square Behind Content */
+        .content-box {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
     </style>
 </head>
@@ -152,38 +155,30 @@
             </div>
 
             <div class="buttons">
-                <button class="btn" id="noButton" onclick="moveButton()">No</button>
                 <button class="btn" id="yesButton" onclick="nextPage()">Yes</button>
+                <button class="btn" id="noButton" onmouseover="moveButton()" onclick="moveButton()">No</button>
             </div>
         </div>
     </div>
 
     <script>
-        let clickCount = 0;
-
-        function moveButton() {
-            const noButton = document.getElementById("noButton");
-            const yesButton = document.getElementById("yesButton");
-            let x = Math.random() * (window.innerWidth - noButton.offsetWidth - 40);
-            let y = Math.random() * (window.innerHeight - noButton.offsetHeight - 40);
-            noButton.style.left = `${x}px`;
-            noButton.style.top = `${y}px`;
-
-            clickCount++;
-
-            if (clickCount === 4) {
-                noButton.innerText = "I no allow you";
-            } else if (clickCount > 4) {
-                noButton.classList.add("hide");
-                yesButton.style.position = "absolute";
-                yesButton.style.bottom = "10px";
-                yesButton.style.left = "50%";
-                yesButton.style.transform = "translateX(-50%)";
-            }
-        }
-
         function nextPage() {
             window.location.href = "yes.html";
+        }
+
+        function moveButton() {
+            var noButton = document.getElementById('noButton');
+            var x = Math.random() * (window.innerWidth - noButton.offsetWidth) - 85;
+            var y = Math.random() * (window.innerHeight - noButton.offsetHeight) - 48;
+
+            // Prevent "No" button from going over the card
+            while (x < 300 || x > 600 || y < 300 || y > 600) {
+                x = Math.random() * (window.innerWidth - noButton.offsetWidth) - 85;
+                y = Math.random() * (window.innerHeight - noButton.offsetHeight) - 48;
+            }
+
+            noButton.style.left = `${x}px`;
+            noButton.style.top = `${y}px`;
         }
     </script>
 </body>
