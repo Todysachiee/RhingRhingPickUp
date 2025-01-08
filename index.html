@@ -34,7 +34,20 @@
             100% { left: 100%; }
         }
 
-        /* Card and Book Style */
+        /* Centering Content */
+        .container {
+            text-align: center;
+        }
+
+        /* Question Text */
+        .header_text {
+            font-size: 1.8em;
+            color: #5c5349;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+
+        /* Book and Card */
         .book-container {
             position: relative;
             width: 300px;
@@ -56,4 +69,136 @@
 
         .book-cover {
             width: 100%;
-           
+            height: 100%;
+            background: linear-gradient(to right, #bc7c5a, #d9a066);
+            border-radius: 10px;
+            position: absolute;
+            transform-origin: left;
+            transition: transform 0.8s ease;
+        }
+
+        .book-content {
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .book-content img {
+            width: 70%;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .book:hover .book-cover {
+            transform: rotateY(-120deg);
+        }
+
+        .book:hover .book-content {
+            opacity: 1;
+        }
+
+        /* Buttons */
+        .buttons {
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 1.2em;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        #yesButton {
+            background-color: #d9a066;
+            color: white;
+        }
+
+        #yesButton:hover {
+            transform: scale(3); /* Enlarge Yes button */
+        }
+
+        #noButton {
+            background-color: #e8c177;
+            color: white;
+        }
+
+        /* Shrinking No Button */
+        .no-shrink {
+            font-size: 0.8em;
+            padding: 5px 10px;
+            opacity: 0.3;
+            position: absolute;
+            transition: all 0.3s ease;
+        }
+
+        /* Hide Button When It Disappears */
+        .hide {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Ribbon Animation -->
+    <div class="ribbon"></div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <h1 class="header_text">Maaari ba kitang hintayin, Rhiya?</h1>
+        <h1 class="header_text">Para maipatunayan ko na mahal kita.</h1>
+
+        <!-- Book with Dancing Guy -->
+        <div class="book-container">
+            <div class="book">
+                <div class="book-cover"></div>
+                <div class="book-content">
+                    <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExcDdtZ2JiZDR0a3lvMWF4OG8yc3p6Ymdvd3g2d245amdveDhyYmx6eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/cLS1cfxvGOPVpf9g3y/giphy.gif" alt="Dancing Guy">
+                </div>
+            </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="buttons">
+            <button class="btn" id="yesButton" onclick="nextPage()">Yes</button>
+            <button class="btn" id="noButton" onclick="moveButton()">No</button>
+        </div>
+    </div>
+
+    <script>
+        // Function to move the No button
+        function moveButton() {
+            const noButton = document.getElementById("noButton");
+            const yesButton = document.getElementById("yesButton");
+            let x = Math.random() * (window.innerWidth - noButton.offsetWidth);
+            let y = Math.random() * (window.innerHeight - noButton.offsetHeight);
+            noButton.style.left = `${x}px`;
+            noButton.style.top = `${y}px`;
+
+            // Shrinking the No button
+            noButton.classList.add("no-shrink");
+
+            // Enlarge the Yes button
+            yesButton.style.transform = "scale(1.5)"; // Enlarge slightly
+
+            // Remove No button after 10 movements
+            if (noButton.offsetWidth < 30) {
+                noButton.classList.add("hide");
+            }
+        }
+
+        function nextPage() {
+            window.location.href = "yes.html";
+        }
+    </script>
+</body>
+</html>
