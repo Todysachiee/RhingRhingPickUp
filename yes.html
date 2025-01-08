@@ -28,24 +28,19 @@
             background: rgba(255, 255, 255, 0.8);
             border-radius: 15px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            animation: fadeIn 1.5s ease-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            width: 90%;
+            max-width: 500px;
         }
 
         .header_text {
-            font-size: 2em;
+            font-size: 1.8em;
             color: #5c5349;
             margin: 10px 0;
             font-weight: bold;
         }
 
         .gif_container img {
-            max-width: 100%;
-            height: auto;
+            width: 100%;
             border-radius: 15px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
@@ -53,10 +48,6 @@
         @media (max-width: 768px) {
             .header_text {
                 font-size: 1.5em;
-            }
-
-            .gif_container img {
-                max-width: 80%;
             }
         }
     </style>
