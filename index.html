@@ -5,33 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles.css">
     <style>
-        /* Body and Background */
+        /* Body and Animated Background */
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background: linear-gradient(120deg, #d19b60, #a6894e);
+            background: linear-gradient(120deg, #f4e1c1, #f0d2a4); /* Soft gradient background */
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             position: relative;
             overflow: hidden;
+            background-size: 400% 400%;
+            animation: gradientMove 10s ease infinite;
         }
 
-        /* Ribbon Animation */
-        .ribbon {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 10px;
-            background: #e6bb76;
-            animation: ribbonMove 5s linear infinite;
-        }
-
-        @keyframes ribbonMove {
-            0% { left: -100%; }
-            100% { left: 100%; }
+        /* Smooth animation for the background */
+        @keyframes gradientMove {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
         }
 
         /* Centering Content */
@@ -47,12 +46,13 @@
             font-weight: bold;
         }
 
-        /* Book and Card */
+        /* Card and Book Style */
         .book-container {
             position: relative;
-            width: 300px;
-            height: 400px;
+            width: 350px;
+            height: 350px;
             perspective: 1000px;
+            margin: 0 auto;
         }
 
         .book {
@@ -65,12 +65,13 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            padding: 10px; /* Padding for the white square behind */
         }
 
         .book-cover {
             width: 100%;
             height: 100%;
-            background: linear-gradient(to right, #bc7c5a, #d9a066);
+            background: linear-gradient(to right, #bc7c5a, #d9a066); /* Earth tones */
             border-radius: 10px;
             position: absolute;
             transform-origin: left;
@@ -148,9 +149,6 @@
     </style>
 </head>
 <body>
-
-    <!-- Ribbon Animation -->
-    <div class="ribbon"></div>
 
     <!-- Main Content -->
     <div class="container">
