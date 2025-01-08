@@ -15,7 +15,6 @@
             position: relative;
         }
 
-        /* Animated Ribbon */
         .ribbon {
             position: absolute;
             width: 150%;
@@ -31,6 +30,21 @@
         @keyframes moveRibbon {
             0%, 100% { transform: rotate(-15deg) translateY(-20px); }
             50% { transform: rotate(-15deg) translateY(20px); }
+        }
+
+        .container-wrapper {
+            position: relative;
+        }
+
+        .shadow {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            width: calc(100% - 30px);
+            height: calc(100% - 30px);
+            background-color: #bc7c5a;
+            border-radius: 15px;
+            z-index: 0;
         }
 
         .container {
@@ -52,55 +66,9 @@
             font-weight: bold;
         }
 
-        .book {
-            width: 200px;
-            height: 150px;
-            margin: 20px auto;
-            position: relative;
-            perspective: 1000px;
-        }
-
-        .book-pages {
-            width: 100%;
-            height: 100%;
-            background: #fff;
-            border-radius: 10px;
-            position: absolute;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .book-cover {
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to right, #bc7c5a, #d9a066);
-            border-radius: 10px;
-            position: absolute;
-            transform-origin: left;
-            transition: transform 0.8s;
-        }
-
-        .book:hover .book-cover {
-            transform: rotateY(-160deg);
-        }
-
-        .book-content {
-            width: 100%;
-            height: 100%;
-            background: #fff;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: absolute;
-        }
-
-        .book-content img {
-            width: 70%;
-            height: auto;
-        }
-
         .buttons {
             margin-top: 20px;
+            position: relative;
         }
 
         .btn {
@@ -116,6 +84,7 @@
         #yesButton {
             background-color: #d9a066;
             color: white;
+            transition: transform 0.4s ease-in-out;
         }
 
         #yesButton:hover {
@@ -126,7 +95,9 @@
         #noButton {
             background-color: #e8c177;
             color: white;
-            position: relative;
+            font-size: 1em;
+            padding: 10px 20px;
+            transition: all 0.3s ease-in-out;
         }
 
         @media (max-width: 768px) {
@@ -142,43 +113,61 @@
     </style>
 </head>
 <body>
-    <!-- Animated Ribbon -->
     <div class="ribbon"></div>
 
-    <div class="container">
-        <div>
-            <h1 class="header_text">Maaari ba kitang hintayin, Rhiya?</h1>
-            <h1 class="header_text">Para maipatunayan ko na mahal kita.</h1>
-        </div>
+    <div class="container-wrapper">
+        <!-- Brown Shadow -->
+        <div class="shadow"></div>
 
-        <!-- Interactive Book -->
-        <div class="book">
-            <div class="book-pages">
-                <div class="book-content">
-                    <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExcDdtZ2JiZDR0a3lvMWF4OG8yc3p6Ymdvd3g2d245amdveDhyYmx6eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/cLS1cfxvGOPVpf9g3y/giphy.gif" 
-                         alt="Dancing Guy">
-                </div>
+        <div class="container">
+            <div>
+                <h1 class="header_text">Maaari ba kitang hintayin, Rhiya?</h1>
+                <h1 class="header_text">Para maipatunayan ko na mahal kita.</h1>
             </div>
-            <div class="book-cover"></div>
-        </div>
 
-        <div class="buttons">
-            <button class="btn" id="yesButton" onclick="nextPage()">Yes</button>
-            <button class="btn" id="noButton" onmouseover="moveButton()" onclick="moveButton()">No</button>
-            <script>
-                function nextPage() {
-                    window.location.href = "yes.html";
-                }
+            <div class="buttons">
+                <button class="btn" id="yesButton" onclick="nextPage()">Yes</button>
+                <button class="btn" id="noButton" onclick="changeText()">No</button>
+                <script>
+                    let phrases = ["Why not :(", "Please :((", "Rhiya :((((", "Just click meee", "Pleaseee"];
+                    let currentIndex = 0;
+                    let isShrinking = true;
 
-                function moveButton() {
-                    var button = document.getElementById('noButton');
-                    var x = Math.random() * (window.innerWidth - button.offsetWidth - 40);
-                    var y = Math.random() * (window.innerHeight - button.offsetHeight - 40);
-                    button.style.left = `${x}px`;
-                    button.style.top = `${y}px`;
-                    button.style.position = 'absolute';
-                }
-            </script>
+                    function changeText() {
+                        // Change text of the "No" button
+                        document.getElementById("noButton").innerText = phrases[currentIndex];
+                        currentIndex = (currentIndex + 1) % phrases.length;
+
+                        // Shrink "No" button
+                        const noButton = document.getElementById("noButton");
+                        let fontSize = parseFloat(window.getComputedStyle(noButton).fontSize);
+                        if (isShrinking && fontSize > 8) {
+                            noButton.style.fontSize = `${fontSize - 2}px`;
+                            noButton.style.padding = "5px 10px";
+                        }
+
+                        // Grow "Yes" button
+                        const yesButton = document.getElementById("yesButton");
+                        let yesScale = parseFloat(window.getComputedStyle(yesButton).transform.match(/matrix.*\((.+)\)/)[1].split(', ')[0]) || 1;
+                        yesButton.style.transform = `scale(${yesScale + 0.2})`;
+
+                        // Prevent further shrinking if too small
+                        if (fontSize <= 8) {
+                            isShrinking = false;
+                        }
+
+                        // Automatically enable Yes button when No becomes too small
+                        if (!isShrinking) {
+                            document.getElementById("noButton").disabled = true;
+                            noButton.style.opacity = "0.5";
+                        }
+                    }
+
+                    function nextPage() {
+                        window.location.href = "yes.html";
+                    }
+                </script>
+            </div>
         </div>
     </div>
 </body>
