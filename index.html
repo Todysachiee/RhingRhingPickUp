@@ -58,13 +58,38 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(255, 255, 255, 0.8);
+            background-color: #d4af37; /* Golden color for Ferrero Rocher-like effect */
             display: flex;
             justify-content: center;
             align-items: center;
             border-radius: 15px;
             cursor: pointer;
-            z-index: 1; /* Ensure the book cover is above the GIF */
+            z-index: 1;
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Ribbon Effect */
+        .ribbon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            height: 25px;
+            background: linear-gradient(45deg, #8c6e33, #d4af37);
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .ribbon:before, .ribbon:after {
+            content: '';
+            width: 25px;
+            height: 25px;
+            background-color: #d4af37;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
         }
 
         .book_cover h2 {
@@ -118,6 +143,7 @@
         <div class="gif_container">
             <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExcDdtZ2JiZDR0a3lvMWF4OG8yc3p6Ymdvd3g2d245amdveDhyYmx6eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/cLS1cfxvGOPVpf9g3y/giphy.gif" alt="Cute animated illustration">
             <div class="book_cover" onclick="showGif()">
+                <div class="ribbon"></div>
                 <h2>Click me :)</h2>
             </div>
         </div>
