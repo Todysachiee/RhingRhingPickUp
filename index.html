@@ -23,12 +23,6 @@
             100% { background-position: 0% 50%; }
         }
 
-        @keyframes popFlowers {
-            0% { transform: scale(0); opacity: 0; }
-            50% { transform: scale(1.2); opacity: 1; }
-            100% { transform: scale(1); }
-        }
-
         .container {
             text-align: center;
             padding: 20px;
@@ -84,6 +78,49 @@
             position: absolute;
         }
 
+        /* Flower Animation */
+        .flower {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: url('https://i.imgur.com/6uwEvF8.png') no-repeat center center;
+            background-size: contain;
+            animation: popFlowers 3s ease-in-out infinite;
+        }
+
+        .flower:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; }
+        .flower:nth-child(2) { left: 70%; top: 10%; animation-delay: 1s; }
+        .flower:nth-child(3) { left: 30%; top: 50%; animation-delay: 2s; }
+        .flower:nth-child(4) { left: 80%; top: 70%; animation-delay: 1.5s; }
+        .flower:nth-child(5) { left: 50%; top: 80%; animation-delay: 2.5s; }
+
+        @keyframes popFlowers {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(1); }
+        }
+
+        /* Sparkles */
+        .sparkle {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: url('https://i.imgur.com/S6iNnTL.png') no-repeat center center;
+            background-size: contain;
+            animation: sparkleEffect 2s ease-in-out infinite;
+        }
+
+        .sparkle:nth-child(1) { left: 20%; top: 30%; animation-delay: 0s; }
+        .sparkle:nth-child(2) { left: 60%; top: 20%; animation-delay: 1s; }
+        .sparkle:nth-child(3) { left: 40%; top: 60%; animation-delay: 1.5s; }
+        .sparkle:nth-child(4) { left: 80%; top: 40%; animation-delay: 2s; }
+
+        @keyframes sparkleEffect {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1.5); opacity: 1; }
+            100% { transform: scale(1); opacity: 0; }
+        }
+
         @media (max-width: 768px) {
             .header_text {
                 font-size: 1.5em;
@@ -94,31 +131,21 @@
                 padding: 8px 16px;
             }
         }
-
-        /* Flowers */
-        .flower {
-            position: absolute;
-            width: 30px;
-            height: 30px;
-            background: url('https://i.imgur.com/Z6JkOgf.png') no-repeat center center;
-            background-size: contain;
-            animation: popFlowers 3s ease-in-out infinite;
-        }
-
-        .flower:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; }
-        .flower:nth-child(2) { left: 70%; top: 10%; animation-delay: 1s; }
-        .flower:nth-child(3) { left: 30%; top: 50%; animation-delay: 2s; }
-        .flower:nth-child(4) { left: 80%; top: 70%; animation-delay: 1.5s; }
-        .flower:nth-child(5) { left: 50%; top: 80%; animation-delay: 2.5s; }
     </style>
 </head>
 <body>
-    <!-- Flower Effects -->
+    <!-- Flowers -->
     <div class="flower"></div>
     <div class="flower"></div>
     <div class="flower"></div>
     <div class="flower"></div>
     <div class="flower"></div>
+
+    <!-- Sparkles -->
+    <div class="sparkle"></div>
+    <div class="sparkle"></div>
+    <div class="sparkle"></div>
+    <div class="sparkle"></div>
 
     <div class="container">
         <div>
@@ -138,8 +165,8 @@
 
                 function moveButton() {
                     var button = document.getElementById('noButton');
-                    var x = Math.random() * (window.innerWidth - button.offsetWidth - 40); // Prevents going too far horizontally
-                    var y = Math.random() * (window.innerHeight - button.offsetHeight - 40); // Prevents going too far vertically
+                    var x = Math.random() * (window.innerWidth - button.offsetWidth - 40);
+                    var y = Math.random() * (window.innerHeight - button.offsetHeight - 40);
                     button.style.left = `${x}px`;
                     button.style.top = `${y}px`;
                     button.style.position = 'absolute';
