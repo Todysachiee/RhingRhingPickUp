@@ -119,6 +119,7 @@
             height: 150px;
             margin: 20px auto;
             perspective: 1000px;
+            z-index: 2;
         }
 
         .book {
@@ -152,10 +153,11 @@
         }
 
         .book-content img {
-            width: 70%;
+            width: 80%;
             height: auto;
+            max-height: 100%;
+            object-fit: contain;
         }
-
     </style>
 </head>
 <body>
