@@ -7,19 +7,30 @@
             margin: 0;
             font-family: Arial, sans-serif;
             background: linear-gradient(120deg, #d3b8ae, #9b847e, #f0e5d3);
-            background-size: 400% 400%;
-            animation: gradientBackground 10s ease infinite;
+            height: 100vh;
+            overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            overflow: hidden;
+            position: relative;
         }
 
-        @keyframes gradientBackground {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        /* Animated Ribbon */
+        .ribbon {
+            position: absolute;
+            width: 150%;
+            height: 200px;
+            top: 50%;
+            left: -25%;
+            background: linear-gradient(to right, #bc5a5b, #6c9c84);
+            transform: rotate(-15deg);
+            animation: moveRibbon 6s ease-in-out infinite;
+            z-index: 0;
+        }
+
+        @keyframes moveRibbon {
+            0%, 100% { transform: rotate(-15deg) translateY(-20px); }
+            50% { transform: rotate(-15deg) translateY(20px); }
         }
 
         .container {
@@ -28,111 +39,49 @@
             background: rgba(255, 255, 255, 0.8);
             border-radius: 15px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            animation: fadeIn 1.5s ease-out;
+            width: 90%;
+            max-width: 500px;
+            z-index: 1;
             position: relative;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
         .header_text {
-            font-size: 2em;
+            font-size: 1.8em;
             color: #5c5349;
             margin: 10px 0;
             font-weight: bold;
         }
 
-        .gif_container {
+        .book {
+            width: 200px;
+            height: 150px;
+            margin: 20px auto;
             position: relative;
+            perspective: 1000px;
         }
 
-        .gif_container img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            display: block;
-            transition: opacity 0.5s ease;
-        }
-
-        .book_cover {
-            position: absolute;
-            top: 0;
-            left: 0;
+        .book-cover {
             width: 100%;
             height: 100%;
-            background: #6f4f28; /* Dark chocolate color */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 15px;
-            cursor: pointer;
-            z-index: 1;
-            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
-            overflow: hidden;
-        }
-
-        .chocolate_bar {
-            width: 80%;
-            height: 80%;
-            background-color: #6f4f28; /* Dark chocolate color */
+            background: linear-gradient(to right, #6c9c84, #bc5a5b);
             border-radius: 10px;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .foil {
-            background: #d4d4d4; /* Foil-like silver color */
-            width: 100%;
-            height: 15%;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             position: absolute;
-            bottom: 0;
-            border-radius: 10px;
+            transform-origin: left;
+            transition: transform 0.8s;
         }
 
-        .text_bar {
-            background-color: #ffffff;
-            color: #5c5349;
-            font-size: 1.5em;
-            font-weight: bold;
-            padding: 10px;
+        .book:hover .book-cover {
+            transform: rotateY(-160deg);
+        }
+
+        .book-pages {
             width: 100%;
-            text-align: center;
-        }
-
-        .ribbon {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 120%;
-            height: 25px;
-            background: linear-gradient(45deg, #b11121, #c91927); /* Red ribbon */
+            height: 100%;
+            background: #fff;
             border-radius: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .ribbon:before, .ribbon:after {
-            content: '';
-            width: 25px;
-            height: 25px;
-            background-color: #c91927;
-            border-radius: 50%;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .book_cover h2 {
-            font-size: 2em;
-            color: #5c5349;
-            font-weight: bold;
-            margin: 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            position: absolute;
         }
 
         .buttons {
@@ -140,7 +89,7 @@
         }
 
         .btn {
-            font-size: 1.2em;
+            font-size: 1em;
             padding: 10px 20px;
             margin: 5px;
             border: none;
@@ -165,27 +114,34 @@
             position: relative;
         }
 
-        #noButton:hover {
-            transform: scale(1.1);
+        @media (max-width: 768px) {
+            .header_text {
+                font-size: 1.5em;
+            }
+
+            .btn {
+                font-size: 0.9em;
+                padding: 8px 16px;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Animated Ribbon -->
+    <div class="ribbon"></div>
+
     <div class="container">
         <div>
             <h1 class="header_text">Maaari ba kitang hintayin, Rhiya?</h1>
             <h1 class="header_text">Para maipatunayan ko na mahal kita.</h1>
         </div>
-        <div class="gif_container">
-            <div class="book_cover" onclick="showGif()">
-                <div class="chocolate_bar">
-                    <div class="foil"></div>
-                    <div class="text_bar">Click me :)</div>
-                </div>
-                <div class="ribbon"></div>
-            </div>
-            <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExcDdtZ2JiZDR0a3lvMWF4OG8yc3p6Ymdvd3g2d245amdveDhyYmx6eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/cLS1cfxvGOPVpf9g3y/giphy.gif" alt="Cute animated illustration">
+
+        <!-- Interactive Book -->
+        <div class="book">
+            <div class="book-pages"></div>
+            <div class="book-cover"></div>
         </div>
+
         <div class="buttons">
             <button class="btn" id="yesButton" onclick="nextPage()">Yes</button>
             <button class="btn" id="noButton" onmouseover="moveButton()" onclick="moveButton()">No</button>
@@ -196,22 +152,11 @@
 
                 function moveButton() {
                     var button = document.getElementById('noButton');
-                    var maxX = window.innerWidth - button.offsetWidth - 20;
-                    var maxY = window.innerHeight - button.offsetHeight - 20;
-
-                    var x = Math.random() * maxX;
-                    var y = Math.random() * maxY;
-
+                    var x = Math.random() * (window.innerWidth - button.offsetWidth - 40);
+                    var y = Math.random() * (window.innerHeight - button.offsetHeight - 40);
                     button.style.left = `${x}px`;
                     button.style.top = `${y}px`;
                     button.style.position = 'absolute';
-                }
-
-                function showGif() {
-                    var gif = document.querySelector('.gif_container img');
-                    var cover = document.querySelector('.book_cover');
-                    gif.style.opacity = '1'; // Show GIF
-                    cover.style.display = 'none'; // Hide the book cover
                 }
             </script>
         </div>
