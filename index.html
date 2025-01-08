@@ -48,6 +48,29 @@
             height: auto;
             border-radius: 15px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            display: none; /* Hide GIF initially */
+        }
+
+        .book_cover {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+        }
+
+        .book_cover h2 {
+            font-size: 2em;
+            color: #5c5349;
+            font-weight: bold;
+            margin: 0;
         }
 
         .buttons {
@@ -93,6 +116,9 @@
         </div>
         <div class="gif_container">
             <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExcDdtZ2JiZDR0a3lvMWF4OG8yc3p6Ymdvd3g2d245amdveDhyYmx6eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/cLS1cfxvGOPVpf9g3y/giphy.gif" alt="Cute animated illustration">
+            <div class="book_cover" onclick="showGif()">
+                <h2>Click me :)</h2>
+            </div>
         </div>
         <div class="buttons">
             <button class="btn" id="yesButton" onclick="nextPage()">Yes</button>
@@ -113,6 +139,13 @@
                     button.style.left = `${x}px`;
                     button.style.top = `${y}px`;
                     button.style.position = 'absolute';
+                }
+
+                function showGif() {
+                    var gif = document.querySelector('.gif_container img');
+                    var cover = document.querySelector('.book_cover');
+                    gif.style.display = 'block'; // Show GIF
+                    cover.style.display = 'none'; // Hide the book cover
                 }
             </script>
         </div>
