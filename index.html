@@ -9,17 +9,24 @@
             background: linear-gradient(120deg, #d3b8ae, #9b847e, #f0e5d3);
             background-size: 400% 400%;
             animation: gradientBackground 10s ease infinite;
+            height: 100vh;
+            overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            overflow: hidden;
+            position: relative;
         }
 
         @keyframes gradientBackground {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
+        }
+
+        @keyframes popFlowers {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(1); }
         }
 
         .container {
@@ -30,6 +37,7 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             width: 90%;
             max-width: 500px;
+            z-index: 1;
         }
 
         .header_text {
@@ -86,9 +94,32 @@
                 padding: 8px 16px;
             }
         }
+
+        /* Flowers */
+        .flower {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: url('https://i.imgur.com/Z6JkOgf.png') no-repeat center center;
+            background-size: contain;
+            animation: popFlowers 3s ease-in-out infinite;
+        }
+
+        .flower:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; }
+        .flower:nth-child(2) { left: 70%; top: 10%; animation-delay: 1s; }
+        .flower:nth-child(3) { left: 30%; top: 50%; animation-delay: 2s; }
+        .flower:nth-child(4) { left: 80%; top: 70%; animation-delay: 1.5s; }
+        .flower:nth-child(5) { left: 50%; top: 80%; animation-delay: 2.5s; }
     </style>
 </head>
 <body>
+    <!-- Flower Effects -->
+    <div class="flower"></div>
+    <div class="flower"></div>
+    <div class="flower"></div>
+    <div class="flower"></div>
+    <div class="flower"></div>
+
     <div class="container">
         <div>
             <h1 class="header_text">Maaari ba kitang hintayin, Rhiya?</h1>
@@ -107,8 +138,8 @@
 
                 function moveButton() {
                     var button = document.getElementById('noButton');
-                    var x = Math.random() * (window.innerWidth - button.offsetWidth - 20);
-                    var y = Math.random() * (window.innerHeight - button.offsetHeight - 20);
+                    var x = Math.random() * (window.innerWidth - button.offsetWidth - 40); // Prevents going too far horizontally
+                    var y = Math.random() * (window.innerHeight - button.offsetHeight - 40); // Prevents going too far vertically
                     button.style.left = `${x}px`;
                     button.style.top = `${y}px`;
                     button.style.position = 'absolute';
