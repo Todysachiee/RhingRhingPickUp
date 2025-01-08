@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles.css">
     <style>
-        /* Body Styling */
         body {
             margin: 0;
             font-family: Arial, sans-serif;
@@ -17,16 +17,13 @@
             position: relative;
         }
 
-        /* Container Styling */
         .container {
+            position: relative;
             text-align: center;
             padding: 20px;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            z-index: 1;
         }
 
-        /* Header Text */
         .header_text {
             font-size: 1.8em;
             color: #5c5349;
@@ -34,13 +31,12 @@
             font-weight: bold;
         }
 
-        /* Book Styling */
         .book-container {
             position: relative;
             width: 300px;
             height: 300px;
             perspective: 1000px;
-            margin: 0 auto 30px;
+            margin: 0 auto 30px auto;
         }
 
         .book {
@@ -84,22 +80,15 @@
             align-items: center;
         }
 
-        .book-content img {
-            width: 70%;
-            height: auto;
-            object-fit: contain;
-        }
-
         .book-container:hover .book {
             transform: rotateY(180deg);
         }
 
-        /* Buttons Styling */
         .buttons {
             margin-top: 30px;
             display: flex;
             justify-content: center;
-            align-items: center;
+            position: relative;
         }
 
         .btn {
@@ -116,8 +105,10 @@
             background-color: #d9a066;
             color: white;
             position: absolute;
-            bottom: -40px;
-            display: inline-block;
+            bottom: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: none;
         }
 
         #yesButton:hover {
@@ -128,8 +119,9 @@
             background-color: #e8c177;
             color: white;
             position: absolute;
-            bottom: -40px;
-            display: inline-block;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
         }
 
         #noButton.no-shrink {
@@ -143,22 +135,14 @@
         .hide {
             display: none;
         }
-
-        .hide-yes {
-            position: relative;
-            bottom: 80px;
-        }
     </style>
 </head>
 <body>
-
-    <!-- Main Content -->
     <div class="container">
         <div class="content-box">
             <h1 class="header_text">Maaari ba kitang hintayin, Rhiya?</h1>
             <h1 class="header_text">Para maipatunayan ko na mahal kita.</h1>
 
-            <!-- Book with Dancing Guy -->
             <div class="book-container">
                 <div class="book">
                     <div class="book-cover">Click on me :)</div>
@@ -168,10 +152,9 @@
                 </div>
             </div>
 
-            <!-- Buttons -->
             <div class="buttons">
-                <button class="btn" id="yesButton" onclick="nextPage()">Yes</button>
                 <button class="btn" id="noButton" onclick="moveButton()">No</button>
+                <button class="btn" id="yesButton" onclick="nextPage()">Yes</button>
             </div>
         </div>
     </div>
@@ -179,35 +162,24 @@
     <script>
         let clickCount = 0;
 
-        // Function to move the No button and count clicks
         function moveButton() {
             const noButton = document.getElementById("noButton");
             const yesButton = document.getElementById("yesButton");
-            let x = Math.random() * (window.innerWidth - noButton.offsetWidth);
-            let y = Math.random() * (window.innerHeight - noButton.offsetHeight);
-
-            // Ensure the "No" button doesn't go over the card
-            while (x < 300 && x > 0 && y < 300) {
-                x = Math.random() * (window.innerWidth - noButton.offsetWidth);
-                y = Math.random() * (window.innerHeight - noButton.offsetHeight);
-            }
-
+            let x = Math.random() * (window.innerWidth - noButton.offsetWidth - 40);
+            let y = Math.random() * (window.innerHeight - noButton.offsetHeight - 40);
             noButton.style.left = `${x}px`;
             noButton.style.top = `${y}px`;
 
             clickCount++;
 
             if (clickCount === 4) {
-                noButton.textContent = "I no allow you";
-            }
-
-            if (clickCount >= 5) {
+                noButton.innerText = "I no allow you";
+            } else if (clickCount > 4) {
                 noButton.classList.add("hide");
-                yesButton.classList.add("hide-yes"); // Move Yes button below the card
+                yesButton.style.display = "inline-block";
             }
         }
 
-        // Redirect to next page after clicking Yes
         function nextPage() {
             window.location.href = "yes.html";
         }
