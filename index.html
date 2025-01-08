@@ -105,10 +105,9 @@
             background-color: #d9a066;
             color: white;
             position: absolute;
-            bottom: -50px;
+            bottom: 0;
             left: 50%;
             transform: translateX(-50%);
-            display: none;
         }
 
         #yesButton:hover {
@@ -176,7 +175,10 @@
                 noButton.innerText = "I no allow you";
             } else if (clickCount > 4) {
                 noButton.classList.add("hide");
-                yesButton.style.display = "inline-block";
+                yesButton.style.position = "absolute";
+                yesButton.style.bottom = "10px";
+                yesButton.style.left = "50%";
+                yesButton.style.transform = "translateX(-50%)";
             }
         }
 
