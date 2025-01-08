@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles.css">
     <style>
+        /* Body and Background */
         body {
             margin: 0;
             font-family: Arial, sans-serif;
@@ -15,6 +18,64 @@
             position: relative;
         }
 
+        /* Book Effect */
+        .book-container {
+            position: relative;
+            width: 250px;
+            height: 150px;
+            perspective: 1000px;
+            z-index: 1;
+        }
+
+        .book {
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            border-radius: 10px;
+            position: absolute;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .book-cover {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, #bc7c5a, #d9a066);
+            border-radius: 10px;
+            position: absolute;
+            transform-origin: left;
+            transition: transform 0.8s;
+        }
+
+        .book-content {
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            transition: opacity 0.3s;
+            opacity: 0;
+        }
+
+        .book-content img {
+            width: 80%;
+            height: auto;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        /* Animation for Book Opening */
+        .book:hover .book-cover {
+            transform: rotateY(-120deg);
+        }
+
+        .book:hover .book-content {
+            opacity: 1;
+        }
+
+        /* Ribbon Animation */
         .ribbon {
             position: absolute;
             width: 150%;
@@ -32,40 +93,7 @@
             50% { transform: rotate(-15deg) translateY(20px); }
         }
 
-        .container-wrapper {
-            position: relative;
-        }
-
-        .shadow {
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            width: calc(100% - 30px);
-            height: calc(100% - 30px);
-            background-color: #bc7c5a;
-            border-radius: 15px;
-            z-index: 0;
-        }
-
-        .container {
-            text-align: center;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            width: 90%;
-            max-width: 500px;
-            z-index: 1;
-            position: relative;
-        }
-
-        .header_text {
-            font-size: 1.8em;
-            color: #5c5349;
-            margin: 10px 0;
-            font-weight: bold;
-        }
-
+        /* Button Style */
         .buttons {
             margin-top: 20px;
             position: relative;
@@ -112,120 +140,83 @@
             }
         }
 
-        /* Card and Book Effect */
-        .book-container {
-            position: relative;
-            width: 220px;
-            height: 150px;
-            margin: 20px auto;
-            perspective: 1000px;
-            z-index: 2;
-        }
-
-        .book {
-            width: 100%;
-            height: 100%;
-            background: #fff;
-            border-radius: 10px;
-            position: absolute;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .book-cover {
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to right, #bc7c5a, #d9a066);
-            border-radius: 10px;
-            position: absolute;
-            transform-origin: left;
-            transition: transform 0.8s;
-        }
-
-        .book-content {
-            width: 100%;
-            height: 100%;
-            background: #fff;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: absolute;
-        }
-
-        .book-content img {
-            width: 80%;
-            height: auto;
-            max-height: 100%;
-            object-fit: contain;
+        /* Text Styling */
+        .header_text {
+            font-size: 1.8em;
+            color: #5c5349;
+            margin: 10px 0;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
+
+    <!-- Ribbon Background -->
     <div class="ribbon"></div>
 
-    <div class="container-wrapper">
-        <div class="shadow"></div>
+    <div class="container">
+        <div>
+            <h1 class="header_text">Maaari ba kitang hintayin, Rhiya?</h1>
+            <h1 class="header_text">Para maipatunayan ko na mahal kita.</h1>
+        </div>
 
-        <div class="container">
-            <div>
-                <h1 class="header_text">Maaari ba kitang hintayin, Rhiya?</h1>
-                <h1 class="header_text">Para maipatunayan ko na mahal kita.</h1>
-            </div>
-
-            <!-- Card with Dancing Guy -->
-            <div class="book-container">
-                <div class="book">
-                    <div class="book-cover"></div>
-                    <div class="book-content">
-                        <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExcDdtZ2JiZDR0a3lvMWF4OG8yc3p6Ymdvd3g2d245amdveDhyYmx6eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/cLS1cfxvGOPVpf9g3y/giphy.gif" alt="Dancing Guy">
-                    </div>
+        <!-- Book with Dancing Guy -->
+        <div class="book-container">
+            <div class="book">
+                <div class="book-cover"></div>
+                <div class="book-content">
+                    <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExcDdtZ2JiZDR0a3lvMWF4OG8yc3p6Ymdvd3g2d245amdveDhyYmx6eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/cLS1cfxvGOPVpf9g3y/giphy.gif" alt="Dancing Guy">
                 </div>
             </div>
+        </div>
 
-            <div class="buttons">
-                <button class="btn" id="yesButton" onclick="nextPage()">Yes</button>
-                <button class="btn" id="noButton" onclick="changeText()">No</button>
-                <script>
-                    let phrases = ["Why not :(", "Please :((", "Rhiya :((((", "Just click meee", "Pleaseee"];
-                    let currentIndex = 0;
-                    let isShrinking = true;
-
-                    function changeText() {
-                        // Change text of the "No" button
-                        document.getElementById("noButton").innerText = phrases[currentIndex];
-                        currentIndex = (currentIndex + 1) % phrases.length;
-
-                        // Shrink "No" button
-                        const noButton = document.getElementById("noButton");
-                        let fontSize = parseFloat(window.getComputedStyle(noButton).fontSize);
-                        if (isShrinking && fontSize > 8) {
-                            noButton.style.fontSize = `${fontSize - 2}px`;
-                            noButton.style.padding = "5px 10px";
-                        }
-
-                        // Grow "Yes" button
-                        const yesButton = document.getElementById("yesButton");
-                        let yesScale = parseFloat(window.getComputedStyle(yesButton).transform.match(/matrix.*\((.+)\)/)[1].split(', ')[0]) || 1;
-                        yesButton.style.transform = `scale(${yesScale + 0.2})`;
-
-                        // Prevent further shrinking if too small
-                        if (fontSize <= 8) {
-                            isShrinking = false;
-                        }
-
-                        // Automatically enable Yes button when No becomes too small
-                        if (!isShrinking) {
-                            document.getElementById("noButton").disabled = true;
-                            noButton.style.opacity = "0.5";
-                        }
-                    }
-
-                    function nextPage() {
-                        window.location.href = "yes.html";
-                    }
-                </script>
-            </div>
+        <!-- Buttons -->
+        <div class="buttons">
+            <button class="btn" id="yesButton" onclick="nextPage()">Yes</button>
+            <button class="btn" id="noButton" onclick="changeText()">No</button>
         </div>
     </div>
+
+    <script>
+        // Button Interaction Logic
+        let phrases = ["Why not :(", "Please :((", "Rhiya :((((", "Just click meee", "Pleaseee"];
+        let currentIndex = 0;
+        let isShrinking = true;
+
+        function changeText() {
+            // Change text of the "No" button
+            document.getElementById("noButton").innerText = phrases[currentIndex];
+            currentIndex = (currentIndex + 1) % phrases.length;
+
+            // Shrink "No" button
+            const noButton = document.getElementById("noButton");
+            let fontSize = parseFloat(window.getComputedStyle(noButton).fontSize);
+            if (isShrinking && fontSize > 8) {
+                noButton.style.fontSize = `${fontSize - 2}px`;
+                noButton.style.padding = "5px 10px";
+            }
+
+            // Grow "Yes" button
+            const yesButton = document.getElementById("yesButton");
+            let yesScale = parseFloat(window.getComputedStyle(yesButton).transform.match(/matrix.*\((.+)\)/)[1].split(', ')[0]) || 1;
+            yesButton.style.transform = `scale(${yesScale + 0.2})`;
+
+            // Prevent further shrinking if too small
+            if (fontSize <= 8) {
+                isShrinking = false;
+            }
+
+            // Automatically enable Yes button when No becomes too small
+            if (!isShrinking) {
+                document.getElementById("noButton").disabled = true;
+                noButton.style.opacity = "0.5";
+            }
+        }
+
+        function nextPage() {
+            window.location.href = "yes.html";
+        }
+    </script>
+
 </body>
 </html>
