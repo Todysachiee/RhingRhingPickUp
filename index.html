@@ -99,7 +99,6 @@
             margin-top: 30px;
             display: flex;
             justify-content: center;
-            flex-direction: column;
             align-items: center;
         }
 
@@ -116,6 +115,9 @@
         #yesButton {
             background-color: #d9a066;
             color: white;
+            position: absolute;
+            bottom: -40px;
+            display: inline-block;
         }
 
         #yesButton:hover {
@@ -125,7 +127,9 @@
         #noButton {
             background-color: #e8c177;
             color: white;
-            position: relative;
+            position: absolute;
+            bottom: -40px;
+            display: inline-block;
         }
 
         #noButton.no-shrink {
@@ -141,11 +145,9 @@
         }
 
         .hide-yes {
-            display: block;
             position: relative;
-            margin-top: 30px;
+            bottom: 80px;
         }
-
     </style>
 </head>
 <body>
@@ -184,7 +186,7 @@
             let x = Math.random() * (window.innerWidth - noButton.offsetWidth);
             let y = Math.random() * (window.innerHeight - noButton.offsetHeight);
 
-            // Make sure the "No" button doesn't go over the card
+            // Ensure the "No" button doesn't go over the card
             while (x < 300 && x > 0 && y < 300) {
                 x = Math.random() * (window.innerWidth - noButton.offsetWidth);
                 y = Math.random() * (window.innerHeight - noButton.offsetHeight);
@@ -201,12 +203,11 @@
 
             if (clickCount >= 5) {
                 noButton.classList.add("hide");
-                yesButton.classList.add("hide-yes");
-                yesButton.style.transform = "scale(1.2)"; // Slightly enlarging the Yes button
+                yesButton.classList.add("hide-yes"); // Move Yes button below the card
             }
         }
 
-        // Redirect to next page
+        // Redirect to next page after clicking Yes
         function nextPage() {
             window.location.href = "yes.html";
         }
