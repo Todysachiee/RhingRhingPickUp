@@ -94,94 +94,102 @@
             transform: rotateY(180deg);
         }
 
-        /* Buttons */
+        /* Buttons Styling */
         .buttons {
             margin-top: 30px;
             display: flex;
             justify-content: center;
-            gap: 20px;
+            flex-direction: column;
+            align-items: center;
         }
 
         .btn {
             padding: 10px 20px;
+            margin: 10px;
             font-size: 1.2em;
             cursor: pointer;
             border: none;
             border-radius: 5px;
             transition: all 0.3s ease;
-            position: relative;
         }
 
         #yesButton {
             background-color: #d9a066;
             color: white;
-            transition: all 0.3s ease;
         }
 
-        #yesButton.center-lower {
-            position: absolute;
-            top: calc(100% + 20px); /* Moves below the card */
-            left: 50%;
-            transform: translateX(-50%);
+        #yesButton:hover {
+            transform: scale(1.2);
         }
 
         #noButton {
             background-color: #e8c177;
             color: white;
+            position: relative;
         }
+
+        #noButton.no-shrink {
+            font-size: 0.8em;
+            padding: 5px 10px;
+            opacity: 0.3;
+            position: absolute;
+            transition: all 0.3s ease;
+        }
+
+        .hide {
+            display: none;
+        }
+
+        .hide-yes {
+            display: block;
+            position: relative;
+            margin-top: 30px;
+        }
+
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1 class="header_text">Maaari ba kitang hintayin, Rhiya?</h1>
-        <h1 class="header_text">Para maipatunayan ko na mahal kita.</h1>
 
-        <div class="book-container">
-            <div class="book">
-                <div class="book-cover">Click on me :)</div>
-                <div class="book-content">
-                    <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExcDdtZ2JiZDR0a3lvMWF4OG8yc3p6Ymdvd3g2d245amdveDhyYmx6eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/cLS1cfxvGOPVpf9g3y/giphy.gif" alt="Dancing Guy">
+    <!-- Main Content -->
+    <div class="container">
+        <div class="content-box">
+            <h1 class="header_text">Maaari ba kitang hintayin, Rhiya?</h1>
+            <h1 class="header_text">Para maipatunayan ko na mahal kita.</h1>
+
+            <!-- Book with Dancing Guy -->
+            <div class="book-container">
+                <div class="book">
+                    <div class="book-cover">Click on me :)</div>
+                    <div class="book-content">
+                        <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExcDdtZ2JiZDR0a3lvMWF4OG8yc3p6Ymdvd3g2d245amdveDhyYmx6eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/cLS1cfxvGOPVpf9g3y/giphy.gif" alt="Dancing Guy">
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="buttons">
-            <button class="btn" id="yesButton" onclick="nextPage()">Yes</button>
-            <button class="btn" id="noButton" onclick="moveButton()">No</button>
+            <!-- Buttons -->
+            <div class="buttons">
+                <button class="btn" id="yesButton" onclick="nextPage()">Yes</button>
+                <button class="btn" id="noButton" onclick="moveButton()">No</button>
+            </div>
         </div>
     </div>
 
     <script>
         let clickCount = 0;
 
+        // Function to move the No button and count clicks
         function moveButton() {
             const noButton = document.getElementById("noButton");
             const yesButton = document.getElementById("yesButton");
-            const container = document.querySelector(".container");
-            const containerRect = container.getBoundingClientRect();
-            const bookContainer = document.querySelector(".book-container");
-            const bookRect = bookContainer.getBoundingClientRect();
+            let x = Math.random() * (window.innerWidth - noButton.offsetWidth);
+            let y = Math.random() * (window.innerHeight - noButton.offsetHeight);
 
-            // Calculate available area excluding the book
-            const minX = containerRect.left;
-            const maxX = containerRect.right - noButton.offsetWidth;
-            const minY = containerRect.top + 50; // Ensure it doesn't overlap with header
-            const maxY = containerRect.bottom - noButton.offsetHeight;
+            // Make sure the "No" button doesn't go over the card
+            while (x < 300 && x > 0 && y < 300) {
+                x = Math.random() * (window.innerWidth - noButton.offsetWidth);
+                y = Math.random() * (window.innerHeight - noButton.offsetHeight);
+            }
 
-            let x, y;
-
-            // Ensure the button doesn't overlap with the book
-            do {
-                x = Math.random() * (maxX - minX) + minX;
-                y = Math.random() * (maxY - minY) + minY;
-            } while (
-                x + noButton.offsetWidth > bookRect.left &&
-                x < bookRect.right &&
-                y + noButton.offsetHeight > bookRect.top &&
-                y < bookRect.bottom
-            );
-
-            noButton.style.position = "absolute";
             noButton.style.left = `${x}px`;
             noButton.style.top = `${y}px`;
 
@@ -189,12 +197,16 @@
 
             if (clickCount === 4) {
                 noButton.textContent = "I no allow you";
-            } else if (clickCount >= 5) {
-                noButton.style.display = "none";
-                yesButton.classList.add("center-lower");
+            }
+
+            if (clickCount >= 5) {
+                noButton.classList.add("hide");
+                yesButton.classList.add("hide-yes");
+                yesButton.style.transform = "scale(1.2)"; // Slightly enlarging the Yes button
             }
         }
 
+        // Redirect to next page
         function nextPage() {
             window.location.href = "yes.html";
         }
