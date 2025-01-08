@@ -11,11 +11,11 @@
             font-family: Arial, sans-serif;
             background: linear-gradient(120deg, #c6a78a, #d9a066, #e8c177);
             height: 100vh;
-            overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
             position: relative;
+            overflow: hidden;
         }
 
         /* Book Effect */
@@ -25,6 +25,9 @@
             height: 150px;
             perspective: 1000px;
             z-index: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .book {
@@ -34,6 +37,9 @@
             border-radius: 10px;
             position: absolute;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .book-cover {
@@ -97,6 +103,10 @@
         .buttons {
             margin-top: 20px;
             position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
         }
 
         .btn {
@@ -107,6 +117,7 @@
             border-radius: 5px;
             cursor: pointer;
             transition: transform 0.2s, background-color 0.3s;
+            position: relative;
         }
 
         #yesButton {
@@ -116,8 +127,8 @@
             font-size: 1em;
         }
 
-        #yesButton:hover {
-            transform: scale(1.1);
+        #yesButton.hover {
+            transform: scale(10); /* Massive size */
             background-color: #bc7c5a;
         }
 
@@ -127,6 +138,28 @@
             font-size: 1em;
             padding: 10px 20px;
             transition: all 0.3s ease-in-out;
+        }
+
+        /* White Rectangle Behind Yes Button */
+        .btn-container {
+            position: relative;
+        }
+
+        .rectangle {
+            background-color: white;
+            padding: 15px 35px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+            position: absolute;
+            top: -5px;
+            z-index: -1;
+        }
+
+        /* Small Button Shrinking */
+        .shrink {
+            font-size: 0.5em;
+            padding: 5px 10px;
+            opacity: 0.3;
         }
 
         @media (max-width: 768px) {
@@ -146,6 +179,7 @@
             color: #5c5349;
             margin: 10px 0;
             font-weight: bold;
+            text-align: center;
         }
     </style>
 </head>
@@ -172,8 +206,11 @@
 
         <!-- Buttons -->
         <div class="buttons">
-            <button class="btn" id="yesButton" onclick="nextPage()">Yes</button>
-            <button class="btn" id="noButton" onclick="changeText()">No</button>
+            <div class="btn-container">
+                <div class="rectangle"></div>
+                <button class="btn" id="yesButton" onclick="nextPage()">Yes</button>
+            </div>
+            <button class="btn" id="noButton" onclick="shrinkNoButton()">No</button>
         </div>
     </div>
 
@@ -181,9 +218,9 @@
         // Button Interaction Logic
         let phrases = ["Why not :(", "Please :((", "Rhiya :((((", "Just click meee", "Pleaseee"];
         let currentIndex = 0;
-        let isShrinking = true;
+        let clickCount = 0;
 
-        function changeText() {
+        function shrinkNoButton() {
             // Change text of the "No" button
             document.getElementById("noButton").innerText = phrases[currentIndex];
             currentIndex = (currentIndex + 1) % phrases.length;
@@ -191,25 +228,22 @@
             // Shrink "No" button
             const noButton = document.getElementById("noButton");
             let fontSize = parseFloat(window.getComputedStyle(noButton).fontSize);
-            if (isShrinking && fontSize > 8) {
+            if (fontSize > 8) {
                 noButton.style.fontSize = `${fontSize - 2}px`;
                 noButton.style.padding = "5px 10px";
             }
 
-            // Grow "Yes" button
+            // Add shrink class to "No" button and enlarge "Yes"
             const yesButton = document.getElementById("yesButton");
-            let yesScale = parseFloat(window.getComputedStyle(yesButton).transform.match(/matrix.*\((.+)\)/)[1].split(', ')[0]) || 1;
-            yesButton.style.transform = `scale(${yesScale + 0.2})`;
+            yesButton.classList.add("hover");
 
-            // Prevent further shrinking if too small
-            if (fontSize <= 8) {
-                isShrinking = false;
-            }
+            // Track how many times the No button has been clicked
+            clickCount++;
 
-            // Automatically enable Yes button when No becomes too small
-            if (!isShrinking) {
-                document.getElementById("noButton").disabled = true;
-                noButton.style.opacity = "0.5";
+            if (clickCount >= 10) {
+                // After 10 clicks, hide the "No" button
+                noButton.classList.add("shrink");
+                noButton.style.pointerEvents = "none";
             }
         }
 
