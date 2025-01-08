@@ -5,37 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles.css">
     <style>
-        /* Body and Animated Background */
+        /* Body and Video Background */
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background: linear-gradient(120deg, #f4e1c1, #f0d2a4); /* Soft gradient background */
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            position: relative;
             overflow: hidden;
-            background-size: 400% 400%;
-            animation: gradientMove 10s ease infinite;
+            position: relative;
         }
 
-        /* Smooth animation for the background */
-        @keyframes gradientMove {
-            0% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0% 50%;
-            }
+        /* Video Background */
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1; /* Behind all other elements */
         }
 
-        /* Centering Content */
+        /* Container Styling */
         .container {
+            position: relative;
             text-align: center;
+            padding: 20px;
+            z-index: 1; /* Above the video */
         }
 
         /* Question Text */
@@ -49,10 +47,10 @@
         /* Card and Book Style */
         .book-container {
             position: relative;
-            width: 350px;
-            height: 350px;
+            width: 300px; /* Instagram square size */
+            height: 300px;
             perspective: 1000px;
-            margin: 0 auto;
+            margin: 0 auto 30px auto; /* Space between card and buttons */
         }
 
         .book {
@@ -65,13 +63,13 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 10px; /* Padding for the white square behind */
+            padding: 10px;
         }
 
         .book-cover {
             width: 100%;
             height: 100%;
-            background: linear-gradient(to right, #bc7c5a, #d9a066); /* Earth tones */
+            background: linear-gradient(to right, #bc7c5a, #d9a066);
             border-radius: 10px;
             position: absolute;
             transform-origin: left;
@@ -106,7 +104,9 @@
 
         /* Buttons */
         .buttons {
-            margin-top: 20px;
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
         }
 
         .btn {
@@ -125,7 +125,7 @@
         }
 
         #yesButton:hover {
-            transform: scale(3); /* Enlarge Yes button */
+            transform: scale(2);
         }
 
         #noButton {
@@ -133,7 +133,6 @@
             color: white;
         }
 
-        /* Shrinking No Button */
         .no-shrink {
             font-size: 0.8em;
             padding: 5px 10px;
@@ -142,33 +141,48 @@
             transition: all 0.3s ease;
         }
 
-        /* Hide Button When It Disappears */
         .hide {
             display: none;
+        }
+
+        /* White Background Square Behind Content */
+        .content-box {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
     </style>
 </head>
 <body>
 
+    <!-- Video Background -->
+    <video class="video-background" autoplay muted loop>
+        <source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4"> <!-- You can replace this with any calming video -->
+        Your browser does not support the video tag.
+    </video>
+
     <!-- Main Content -->
     <div class="container">
-        <h1 class="header_text">Maaari ba kitang hintayin, Rhiya?</h1>
-        <h1 class="header_text">Para maipatunayan ko na mahal kita.</h1>
+        <div class="content-box">
+            <h1 class="header_text">Maaari ba kitang hintayin, Rhiya?</h1>
+            <h1 class="header_text">Para maipatunayan ko na mahal kita.</h1>
 
-        <!-- Book with Dancing Guy -->
-        <div class="book-container">
-            <div class="book">
-                <div class="book-cover"></div>
-                <div class="book-content">
-                    <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExcDdtZ2JiZDR0a3lvMWF4OG8yc3p6Ymdvd3g2d245amdveDhyYmx6eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/cLS1cfxvGOPVpf9g3y/giphy.gif" alt="Dancing Guy">
+            <!-- Book with Dancing Guy -->
+            <div class="book-container">
+                <div class="book">
+                    <div class="book-cover"></div>
+                    <div class="book-content">
+                        <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExcDdtZ2JiZDR0a3lvMWF4OG8yc3p6Ymdvd3g2d245amdveDhyYmx6eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/cLS1cfxvGOPVpf9g3y/giphy.gif" alt="Dancing Guy">
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Buttons -->
-        <div class="buttons">
-            <button class="btn" id="yesButton" onclick="nextPage()">Yes</button>
-            <button class="btn" id="noButton" onclick="moveButton()">No</button>
+            <!-- Buttons -->
+            <div class="buttons">
+                <button class="btn" id="yesButton" onclick="nextPage()">Yes</button>
+                <button class="btn" id="noButton" onclick="moveButton()">No</button>
+            </div>
         </div>
     </div>
 
@@ -186,7 +200,7 @@
             noButton.classList.add("no-shrink");
 
             // Enlarge the Yes button
-            yesButton.style.transform = "scale(1.5)"; // Enlarge slightly
+            yesButton.style.transform = "scale(2)"; // Enlarge slightly
 
             // Remove No button after 10 movements
             if (noButton.offsetWidth < 30) {
