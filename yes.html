@@ -1,18 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <link rel="stylesheet" href="./yes_style.css">
-        
-    </head> 
-    <body>
-        <div class="container">
-            <div >
-                <h1 class = "header_text">Thank you! I promise i'll be better for you, Rhiya :))</h1>
-            </div>
-            <div class="gif_container">
-                <img src="https://media0.giphy.com/media/T86i6yDyOYz7J6dPhf/giphy.gif" alt="Cute animated illustration">
-            </div>
+<head>
+    <link rel="stylesheet" href="./yes_style.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(120deg, #d3b8ae, #9b847e, #f0e5d3);
+            background-size: 400% 400%;
+            animation: gradientBackground 10s ease infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        @keyframes gradientBackground {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .header_text {
+            font-size: 2em;
+            color: #5c5349;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+
+        .gif_container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .header_text {
+                font-size: 1.5em;
+            }
+
+            .gif_container img {
+                max-width: 80%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div>
+            <h1 class="header_text">Thank you! I promise I'll be better for you, Rhiya :))</h1>
         </div>
-       
-    </body> 
+        <div class="gif_container">
+            <img src="https://media0.giphy.com/media/T86i6yDyOYz7J6dPhf/giphy.gif" alt="Cute animated illustration">
+        </div>
+    </div>
+</body>
 </html>
