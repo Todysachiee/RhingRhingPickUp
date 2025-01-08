@@ -6,7 +6,7 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background: linear-gradient(120deg, #d3b8ae, #9b847e, #f0e5d3);
+            background: linear-gradient(120deg, #c6a78a, #a6826b, #e4d0b8);
             height: 100vh;
             overflow: hidden;
             display: flex;
@@ -22,7 +22,7 @@
             height: 200px;
             top: 50%;
             left: -25%;
-            background: linear-gradient(to right, #bc5a5b, #6c9c84);
+            background: linear-gradient(to right, #a6826b, #7a5d4f);
             transform: rotate(-15deg);
             animation: moveRibbon 6s ease-in-out infinite;
             z-index: 0;
@@ -60,12 +60,20 @@
             perspective: 1000px;
         }
 
+        .book-pages {
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            border-radius: 10px;
+            position: absolute;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
         .book-cover {
             width: 100%;
             height: 100%;
-            background: linear-gradient(to right, #6c9c84, #bc5a5b);
+            background: linear-gradient(to right, #a6826b, #7a5d4f);
             border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             position: absolute;
             transform-origin: left;
             transition: transform 0.8s;
@@ -75,13 +83,20 @@
             transform: rotateY(-160deg);
         }
 
-        .book-pages {
+        .book-content {
             width: 100%;
             height: 100%;
             background: #fff;
             border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             position: absolute;
+        }
+
+        .book-content img {
+            width: 70%;
+            height: auto;
         }
 
         .buttons {
@@ -99,17 +114,17 @@
         }
 
         #yesButton {
-            background-color: #6c9c84;
+            background-color: #7a5d4f;
             color: white;
         }
 
         #yesButton:hover {
             transform: scale(1.1);
-            background-color: #567a63;
+            background-color: #5e463a;
         }
 
         #noButton {
-            background-color: #bc5a5b;
+            background-color: #a6826b;
             color: white;
             position: relative;
         }
@@ -138,7 +153,12 @@
 
         <!-- Interactive Book -->
         <div class="book">
-            <div class="book-pages"></div>
+            <div class="book-pages">
+                <div class="book-content">
+                    <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExcDdtZ2JiZDR0a3lvMWF4OG8yc3p6Ymdvd3g2d245amdveDhyYmx6eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/cLS1cfxvGOPVpf9g3y/giphy.gif" 
+                         alt="Dancing Guy">
+                </div>
+            </div>
             <div class="book-cover"></div>
         </div>
 
