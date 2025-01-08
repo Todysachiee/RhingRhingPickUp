@@ -50,6 +50,7 @@
             border-radius: 15px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             display: block;
+            transition: opacity 0.5s ease;
         }
 
         .book_cover {
@@ -207,7 +208,7 @@
                 function showGif() {
                     var gif = document.querySelector('.gif_container img');
                     var cover = document.querySelector('.book_cover');
-                    gif.style.display = 'block'; // Show GIF
+                    gif.style.opacity = '1'; // Show GIF
                     cover.style.display = 'none'; // Hide the book cover
                 }
             </script>
