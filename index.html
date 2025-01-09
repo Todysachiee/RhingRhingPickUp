@@ -5,7 +5,7 @@
     <style>
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', Arial, sans-serif;
             background: linear-gradient(120deg, #d3b8ae, #9b847e, #f0e5d3);
             background-size: 400% 400%;
             animation: gradientBackground 10s ease infinite;
@@ -24,11 +24,13 @@
 
         .container {
             text-align: center;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
             animation: fadeIn 1.5s ease-out;
+            max-width: 400px;
+            width: 90%;
         }
 
         @keyframes fadeIn {
@@ -37,14 +39,15 @@
         }
 
         .header_text {
-            font-size: 2em;
+            font-size: 1.8em;
             color: #5c5349;
-            margin: 10px 0;
+            margin: 15px 0;
             font-weight: bold;
+            line-height: 1.5;
         }
 
         .gif_container img {
-            max-width: 100%;
+            width: 100%;
             height: auto;
             border-radius: 15px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
@@ -55,23 +58,25 @@
         }
 
         .btn {
-            font-size: 1.2em;
-            padding: 10px 20px;
-            margin: 5px;
+            font-size: 1.1em;
+            padding: 12px 30px;
+            margin: 10px;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
-            transition: transform 0.2s, background-color 0.3s;
+            transition: transform 0.2s, background-color 0.3s, box-shadow 0.3s;
         }
 
         #yesButton {
             background-color: #6c9c84;
             color: white;
+            box-shadow: 0 4px 10px rgba(108, 156, 132, 0.5);
         }
 
         #yesButton:hover {
             transform: scale(1.1);
             background-color: #567a63;
+            box-shadow: 0 6px 15px rgba(86, 122, 99, 0.6);
         }
 
         #noButton {
@@ -82,6 +87,11 @@
 
         #noButton:hover {
             transform: scale(1.1);
+        }
+
+        /* Smooth motion for runaway button */
+        #noButton {
+            transition: top 0.2s ease, left 0.2s ease;
         }
     </style>
 </head>
@@ -96,7 +106,7 @@
         </div>
         <div class="buttons">
             <button class="btn" id="yesButton" onclick="nextPage()">Yes</button>
-            <button class="btn" id="noButton" onmouseover="moveButton()" onclick="moveButton()">No</button>
+            <button class="btn" id="noButton" onmouseover="moveButton()">No</button>
             <script>
                 function nextPage() {
                     window.location.href = "yes.html";
