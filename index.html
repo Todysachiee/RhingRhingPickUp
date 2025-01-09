@@ -6,9 +6,9 @@
         body {
             margin: 0;
             font-family: 'Poppins', Arial, sans-serif;
-            background: linear-gradient(120deg, #d3b8ae, #9b847e, #f0e5d3);
-            background-size: 400% 400%;
-            animation: gradientBackground 10s ease infinite;
+            background: linear-gradient(120deg, #f6d365, #fda085, #fbc2eb, #a6c1ee);
+            background-size: 300% 300%;
+            animation: gradientBackground 12s ease infinite;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -83,15 +83,11 @@
             background-color: #bc5a5b;
             color: white;
             position: relative;
+            transition: top 0.2s ease, left 0.2s ease, transform 0.2s;
         }
 
         #noButton:hover {
             transform: scale(1.1);
-        }
-
-        /* Smooth motion for runaway button */
-        #noButton {
-            transition: top 0.2s ease, left 0.2s ease;
         }
     </style>
 </head>
@@ -99,7 +95,6 @@
     <div class="container">
         <div>
             <h1 class="header_text">Maaari ba kitang hintayin, Rhiya?</h1>
-            <h1 class="header_text">Para maipatunayan ko na mahal kita.</h1>
         </div>
         <div class="gif_container">
             <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExcDdtZ2JiZDR0a3lvMWF4OG8yc3p6Ymdvd3g2d245amdveDhyYmx6eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/cLS1cfxvGOPVpf9g3y/giphy.gif" alt="Cute animated illustration">
@@ -113,16 +108,22 @@
                 }
 
                 function moveButton() {
-                    var button = document.getElementById('noButton');
-                    var maxX = window.innerWidth - button.offsetWidth - 20;
-                    var maxY = window.innerHeight - button.offsetHeight - 20;
+                    const button = document.getElementById('noButton');
+                    const maxX = window.innerWidth - button.offsetWidth - 20;
+                    const maxY = window.innerHeight - button.offsetHeight - 20;
 
-                    var x = Math.random() * maxX;
-                    var y = Math.random() * maxY;
+                    const x = Math.random() * maxX;
+                    const y = Math.random() * maxY;
 
+                    button.style.position = 'absolute';
                     button.style.left = `${x}px`;
                     button.style.top = `${y}px`;
-                    button.style.position = 'absolute';
+
+                    // Add bounce animation effect
+                    button.style.transform = 'scale(1.2)';
+                    setTimeout(() => {
+                        button.style.transform = 'scale(1)';
+                    }, 100);
                 }
             </script>
         </div>
