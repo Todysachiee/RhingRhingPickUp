@@ -102,31 +102,32 @@
         <div class="buttons">
             <button class="btn" id="yesButton" onclick="nextPage()">Yes</button>
             <button class="btn" id="noButton" onmouseover="moveButton()">No</button>
-            <script>
-                function nextPage() {
-                    window.location.href = "yes.html";
-                }
-
-                function moveButton() {
-                    const button = document.getElementById('noButton');
-                    const maxX = window.innerWidth - button.offsetWidth - 20;
-                    const maxY = window.innerHeight - button.offsetHeight - 20;
-
-                    const x = Math.random() * maxX;
-                    const y = Math.random() * maxY;
-
-                    button.style.position = 'absolute';
-                    button.style.left = `${x}px`;
-                    button.style.top = `${y}px`;
-
-                    // Add bounce animation effect
-                    button.style.transform = 'scale(1.2)';
-                    setTimeout(() => {
-                        button.style.transform = 'scale(1)';
-                    }, 100);
-                }
-            </script>
         </div>
     </div>
+
+    <script>
+        function nextPage() {
+            window.location.href = "https://rhingrhingpickup.my.canva.site/";  // Redirects to the Canva page
+        }
+
+        function moveButton() {
+            const button = document.getElementById('noButton');
+            const maxX = window.innerWidth - button.offsetWidth - 20;
+            const maxY = window.innerHeight - button.offsetHeight - 20;
+
+            const x = Math.random() * maxX;
+            const y = Math.random() * maxY;
+
+            button.style.position = 'absolute';
+            button.style.left = `${x}px`;
+            button.style.top = `${y}px`;
+
+            // Add bounce animation effect
+            button.style.transform = 'scale(1.2)';
+            setTimeout(() => {
+                button.style.transform = 'scale(1)';
+            }, 100);
+        }
+    </script>
 </body>
 </html>
