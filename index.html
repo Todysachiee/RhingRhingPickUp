@@ -58,68 +58,6 @@
             transition: opacity 0.5s ease;
         }
 
-        .book_cover {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #6f4f28; /* Dark chocolate color */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 15px;
-            cursor: pointer;
-            z-index: 1;
-            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
-            overflow: hidden;
-        }
-
-        .chocolate_bar {
-            width: 80%;
-            height: 80%;
-            background-color: #6f4f28; /* Dark chocolate color */
-            border-radius: 10px;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .foil {
-            background: #d4d4d4; /* Foil-like silver color */
-            width: 100%;
-            height: 15%;
-            position: absolute;
-            bottom: 0;
-            border-radius: 10px;
-        }
-
-        .text_bar {
-            background-color: #ffffff;
-            color: #5c5349;
-            font-size: 1.5em;
-            font-weight: bold;
-            padding: 10px;
-            width: 100%;
-            text-align: center;
-        }
-
-        .ribbon {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 120%;
-            height: 25px;
-            background: linear-gradient(45deg, #b11121, #c91927); /* Red ribbon */
-            border-radius: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
         .buttons {
             margin-top: 20px;
         }
@@ -167,13 +105,6 @@
             <h1 class="header_text">Para maipatunayan ko na mahal kita.</h1>
         </div>
         <div class="gif_container">
-            <div class="book_cover" onclick="showGif()">
-                <div class="chocolate_bar">
-                    <div class="foil"></div>
-                    <div class="text_bar">Click me :)</div>
-                </div>
-                <div class="ribbon"></div>
-            </div>
             <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExcDdtZ2JiZDR0a3lvMWF4OG8yc3p6Ymdvd3g2d245amdveDhyYmx6eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/cLS1cfxvGOPVpf9g3y/giphy.gif" alt="Cute animated illustration">
         </div>
         <div class="buttons">
@@ -195,13 +126,6 @@
                     button.style.left = `${x}px`;
                     button.style.top = `${y}px`;
                     button.style.position = 'absolute';
-                }
-
-                function showGif() {
-                    var gif = document.querySelector('.gif_container img');
-                    var cover = document.querySelector('.book_cover');
-                    gif.style.opacity = '1'; // Show GIF
-                    cover.style.display = 'none'; // Hide the book cover
                 }
             </script>
         </div>
